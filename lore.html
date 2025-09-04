@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sylus Lore</title>
+  <link rel="icon" type="image/png" href="content/rook.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --accent: #7b1f2e;
+      --muted: #bbb;
+    }
+
+    /* -------------------- Hero Video Header -------------------- */
+    header {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      overflow: hidden;
+    }
+    header video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      filter: brightness(0.35);
+      z-index: -1;
+    }
+
+    /* -------------------- Transparent Navigation -------------------- */
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 12px 24px;
+      background: rgba(15, 11, 18, 0.5); 
+      backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    nav a.active {
+      color: var(--accent);
+    }
+
+    /* -------------------- Hero Overlay Text -------------------- */
+    .hero-text {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+      z-index: 5;
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin: 0;
+      color: #ff012b; 
+      text-shadow: 
+        0 0 2px #7b1f2e,
+        0 0 5px #7b1f2e,
+        0 0 10px rgba(123, 31, 46, 0.6),
+        0 0 15px rgba(123, 31, 46, 0.5);
+    }
+    .hero-text p {
+      font-size: 1.2em;
+      color: #fff;
+      text-shadow: 0 0 2px #f00, 0 0 4px #7b1f2e;
+    }
+
+    .myth-label {
+  font-family: 'Playfair Display', serif; 
+  font-weight: 600;                      
+  font-size: 1.1em;                      
+  color: var(--accent);                  
+  margin-right: 6px;                    
+}
+
+details summary {
+  font-family: inherit;   
+  font-size: inherit;     
+  font-weight: normal;    
+  list-style: none;       
+  cursor: pointer;
+  color: var(--muted);    
+}
+
+details summary::-webkit-details-marker {
+  display: none; 
+}
+
+
+
+    /* -------------------- Lore Content Cards -------------------- */
+    .lore-section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+    .lore-card {
+      background: rgba(20, 16, 24, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      margin-bottom: 24px;
+    }
+    .lore-card h2, .lore-card h3 {
+      font-family: 'Playfair Display', serif;
+      margin-top: 0;
+    }
+    .lore-card h2 {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    .lore-card h3 {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .lore-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+    .lore-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* Sub-cards (nested lore) */
+    .sub-card {
+      margin-left: 20px;
+      background: rgba(20, 16, 24, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: none;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Hero Header with Video -->
+  <header>
+    <video autoplay muted loop>
+      <source src="content/sylusloop.mp4" type="video/mp4">
+    </video>
+
+    <!-- Transparent nav overlay -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="lore.html" class="active">Lore</a>
+      <a href="index.html#more">More</a>
+    </nav>
+
+    <div class="hero-text">
+      <h1>Sylus Lore</h1>
+      <p>Discover the story, secrets, and background of Sylus</p>
+    </div>
+  </header>
+
+  <!-- 🔹 Lore Sections -->
+
+  <section id="summary" class="lore-section">
+    <div class="lore-card">
+      <h2>Summary</h2>
+      <img src="content/summary.avif" alt="Sylus Summary">
+      <p>Sylus is first introduced in the preview as Most Wanted Criminal in Philos's history code named SYLUS HDS-7213 and the only one to ever escape the space-time prison i.e The Supreme Interstellar Starship Tartarus. He is currently the Boss of Onychinus an organization that operate mainly on the Lawless Zone N109.
+        He was once captured and trapped within something called a Space-Time prison, but he broke out and escaped anyway. He took over a planet and killed it's corrupt Overlord and Highlords.
+        Then he took all the plundered materials and returned them to their original planets. Kind of in his Robin-hood era.
+    <p>
+
+    <p>
+  <span class="myth-label">MYTH:</span>
+  He was a Dragon/ Fiend in a different world called "Philos." Philos sees Sylus as a monster, and believes in a prophecy that states a dragon will bring about the Doomsday. So they kill all the dragons and trap Sylus in the Abyss for 1677 years.
+</p>
+
+    </div>
+
+    <!-- Relationships subsection -->
+    <div id="relationships" class="lore-card sub-card">
+      <h3>Relationships</h3>
+      <p>Sylus has complex relationships marked by a powerful, independent exterior and a hidden, soft, and vulnerable side. His primary relationships are with the Player, a subordinate duo named Luke and Kieran, and his mechanical crow Mephisto.</p>
+
+      <div id="player" class="lore-card sub-card">
+  <h3>Player</h3>
+
+  <details>
+    <summary>
+      Sylus first met Player on the chapter 9 Long-Awaited Revelry. He seems to know the Player before and made no attempt of hiding the fact. In the story, he saved the Player from a human trafficker. Unfortunately at the time, the Player have already developed a sense of distrust in him based on her previous investigation on Onychinus, which was started because of the tragedy that happened to her family.
+       His dynamic with the Player usually went on with bantering which later slowly ease into trust and respect after multiple twists and turns. <span style="color:var(--accent); font-weight:600;"> [More]</span>
+    </summary>
+
+    <p>While Sylus and the Player work together to coax a two-month old kitten out of its hiding spot atop a tall cabinet in one of Sylus's residences, they grow closer.</p>
+    <p>As Sylus prepares to engage with His Highness, a rival arms dealer on Tulla Island, the Player nervously observes his activity in one of his many gun caches.
+    It appears he plans to infiltrate alone and with only two weapons: Sylus's gun and her Hunter gun. 
+    Any of her attempts to have him recuit more battle allies or load up more weapons fail to sway the already resolute Sylus.
+     He makes a bet with her and says goodbye. The news broadcasts an incident on Tulla Island a few days later. 
+     When the Player spots Sylus in the city crowd, she rushes towards him, chastising him and demanding he never disappear on her again.
+      He agrees to her conditions as a reaffirming sign of her desire to continue their relationship</p>
+    <p>As a TV ad for Pile It Up plays in her home, the Player nestles on the couch and reminisces back to a time early on in their relationship. 
+    After she realized she didn't want to be another trace of Sylus's life that he wipes away or hides from others, she accepts the danger continuing their relationship brings and opens her heart up to him. 
+    Sylus gently voices his support for whatever path she takes their relationship and she confirms that she will be ready to defend them if anyone tried to turn her into Sylus's weakness.</p>
+    <p>When the Player and her colleagues bump into Sylus during a team outing at a fancy resort, she helps conceal his true identity by giving him a fake alias, Mr. Skye.
+     As her colleagues excitedly invite "Mr. Skye" to join them and pester him with questions, he later adds to his fake alias and discloses his occupation as a "forgettable, humble fruit vendor."
+      In actuality, he secretly reveals to the Player he owns the resort they're currently enjoying.</p>
+    <p>After a long night of hunting Wanderers, the injured Player is found by Sylus after he attended a jewelry auctiom nearby. They take shelter from Wanderers in an abandoned building for the night.
+     With muddled dreams and waking in confusion, it may appear the Player is recalling memories from the Abysm Soverign myth.</p>
+  </details>
+</div>
+
+
+
+
+      <div id="mephisto" class="lore-card sub-card">
+        <h3>Mephisto</h3>
+        <p>Sylus is the creator of Mephisto the mechanical crow, but in one of the episodes, he explained that he has no part in setting Mephisto's personality program, such as how it likes shiny things similar to a real crow. Mephisto usually becomes Sylus's intelligence agent to get information around Linkon City and N109 Zone.</p>
+      </div>
+
+      <div id="lukekieran" class="lore-card sub-card">
+        <h3>Luke & Kieran</h3>
+        <p>Luke and Kieran are Sylus's loyal subordinates. Their works cover what assistants usually do. They seem to enjoy to do things for their boss, to the point that they never thought that overwork is tiring, one example is securing routes for Onychinus's businesses on holiday.
+         They originally become a source of comical relief between Sylus and Player before the relationship between the two progresses, for example they can be seen multiple times commenting in Sylus social media moments teasing him indirectly with things related to the Player .</p>
+      </div>
+    </div>
+  </section>
+
+<!-- Main Story Section -->
+  <section id="main-story" class="lore-section">
+    <div class="lore-card">
+      <h2>Main Story</h2>
+      <img src="content/mainstory.jpg" alt="Main Story">
+      <p>Sylus is an ancient, immortal being known for his escapades after his species' genocide and his deep, recurring connection with the main character (MC). After his species, the Philosian Dragons, was wiped out, he became a legendary outlaw and warlord, known for overthrowing corrupt rulers and redistributing wealth, a period that includes a "Robin Hood era".</p>
+    </div>
+
+    <div id="deepspace" class="lore-card sub-card">
+      <h3>Under Deepspace</h3>
+      <img src="content/deepspace.jpg" alt="Under Deepspace">
+      <p>During a mission debrief, Jenna expands on Xavier's brief mention regarding Onychinus. The Player learns Sylus is the leader of Onychinus and their elusive purpose concerning modified Protocores.
+
+The Player first hears Sylus's voice while investigating the murder of an Ever Group researcher, which was linked to Onychinus. She obtained a photo of the victim and a voice clip of Sylus, followed by the victim screaming. She doesn't realize the voice belongs to Sylus at this time, but she memorizes it.</p>
+    </div>
+
+    <div id="revelry" class="lore-card sub-card">
+      <h3>Long Awaited Revelry</h3>
+      <img src="content/revelry.webp" alt="Long Awaited Revelry">
+
+      <details>
+      <summary>
+      The Player encountered Sylus shortly after being trafficked to the N109 Zone by an unnamed "Man In Black". When the man tried to fire a bullet at the Player, Sylus stopped the bullet mid-air using his Evol and disintegrated the man. She recognized Sylus's voice when he spoke to her.
+       Upon looking into his glowing right eye, the Player heard a voice in her head urging her to devour him and gain the power she's always dreamed of. Sylus told her they are kindred spirits and the Player blacks out <span style="color:var(--accent); font-weight:600;"> [More]</span>
+    </summary>
+      <p>Over the span of three days in his mansion, Sylus tried and fails to force the Player to resonate with him. The Player is reluctant to cooperate with him because she believes he is responsible for the explosion that seemingly killed Caleb and her grandma.
+         Sylus hands the Player a gun and taunts her after she claims to want to kill him.
+        When the Player hesitates, Sylus puts a hand over hers and fires the gun into his own heart.
+        However, his Evol easily regenerates him.</p>
+      <p>Frustrated with their lack of progress, Sylus takes the Player to Philip, the owner of the Odd Workshop in the N109 Zone who has a connection to her grandma.
+         In the Odd Workshop, Sylus intends to make her the first living test subject in Philip's Evol Linkage Alteration project because Sylus believe that there is something wrong with the player's Evol. 
+         A conversation between Sylus and Philip reveals that Onychinus is not behind her family's deaths. Philip analyzes her Evol and explains that her Evol is suppressed because she is subconsciously rejecting him, scared of him, or disgusted by him.
+        In order to resonate with Sylus, the Player can't be hostile towards him.</p>
+      <p>Sylus left while the player Evol is being stabilized by Philip, while Mephisto remained to monitor the player and deal with other eyes around the player that disguised as rats.
+         Afterwards, the Player wanders around the N-109 Zone trying to gather more information about her surroundings and learn more about Onychinus and Sylus, then shifting her goal to get the Aether Core that being scheduled to be auctioned in the N109 Zone.</p>
+    </details>
+    </div>
+  </section>
+
+  <!-- Past Lore -->
+
+  <section id="past" class="lore-section">
+    <div class="lore-card">
+      <h2>Sylus’s Past Explained</h2>
+      <img src="content/past.avif" alt="Sylus’s Past">
+      <p>Not much is known about Sylus' past, and he's certainly not the most forthcoming about it.
+        When the MC meets him, he has just returned from a long, mysterious hiatus. Not even his organization, Onychinus knew where he was.
+        While Sylus hasn't given many clues as to what his past life and childhood were like, a few mentions arise in his Memory Cards and through various event stories.
+        During their first meeting (in Chapter Two of Long Awaited Revelry, Ambiguous Chaos), Sylus tells the MC that he's surprised she doesn't remember him and that they are "the same".
+        The MC's memory gap is a persistent theme throughout the narrative, so it's possible she and Sylus became acquainted during this time.
+    </p>
+    </div>
+
+    <div id="landoflost" class="lore-card sub-card">
+      <h3>Land of Lost</h3>
+      <img src="content/landoflost.avif" alt="Land of Lost">
+      <p>Most information about Sylus' recent past comes from his Anecdote, Land Of Lost. Sylus' Anecdote story explains that he managed to conquer the N109 Zone after traveling to Linkon City from another planet, very likely Philos.
+    Sylus brought wealth from planets and galaxies that he had pillaged. It's possible these riches were how he began his network of illegal armories and other unusual treasures.
+    In the main story, Sylus also reveals to the MC that he has a powerful Aether Core behind his eye that allows him to see a person's deepest desires. Could this be why he claims he and the MC are the same? Is the only connection between them the presence of modified Aether Cores in their bodies?
+    The answers to these questions haven't come up yet, but with the current trajectory of the main storyline and the MC's search for answers about her own Aether Core, Sylus' origins will likely be uncovered in the coming chapters.
+      </p>
+    </div>
+
+    <div id="lastdragon" class="lore-card sub-card">
+      <h3>Last Dragon</h3>
+      <img src="content/lastdragon.avif" alt="Last Dragon">
+      <p>After much anticipation, Sylus' second Myth came out during the Where Drakeshadows Fall event Wish Pool.
+        In Sylus' second Myth, Beyond Cloudfall, it is revealed that Sylus was the very last dragon to rule Philos long before the age of humanity. It is at this point that he meets the MC, a condemned sorceress, for the first time.
+        The MC saves Sylus from imprisonment in the Abyss and makes a deal to free him if he saves her life. The cost is her soul. That pivotal moment begins a long, self-fulfilling prophecy that binds their souls together throughout the ages and persists to this day.
+        Ultimately, the two are fated to devour each other and perhaps bring about Doomsday, the ultimate end of Philos, though whether this comes to pass is unknown.
+        As more memories are released and collected and as the MC's affinity with Sylus improves, more information on their shared past is sure to be revealed.
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>

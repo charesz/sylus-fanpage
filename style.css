@@ -1,0 +1,423 @@
+:root{
+  --bg:#08030a;
+  --panel:#0f0b12;
+  --accent:#7b1f2e;
+  --muted:#9b8f98;
+  --glass: rgba(255,255,255,0.04);
+  --gold: #c09a6b;
+  --max-width:1100px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:radial-gradient(1200px 600px at 10% 15%, rgba(130,20,30,0.06), transparent 5%),
+             radial-gradient(900px 500px at 95% 85%, rgba(10,10,20,0.06), transparent 6%),
+             var(--bg);
+  color:#eee;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  -webkit-overflow-scrolling:touch;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*  Video Background + Overlay */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; 
+}
+
+main section {
+  margin-top: 40px; /* space above each section */
+  margin-bottom: 40px; /* space below each section */
+}
+
+/*Custom Scrollbar */
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#2a1b22, #4a2b36);border-radius:8px;border:3px solid rgba(0,0,0,0)}
+
+/* Header & Nav*/
+header{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter: blur(6px);
+  background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border-bottom:1px solid rgba(255,255,255,0.02);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{
+  width:54px;height:54px;flex:0 0 54px;border-radius:8px;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(180deg,#12060a,var(--panel));box-shadow:0 6px 18px rgba(0,0,0,0.6), inset 0 -6px 30px rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.logo img {
+  width: 42px;          
+  height: 42px;
+  object-fit: contain;   
+  display: block;        
+}
+
+nav{display:flex;gap:16px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:8px}
+nav a:hover{color:var(--muted);background:var(--glass)}
+
+main{max-width:var(--max-width);margin:34px auto;padding:0 20px}
+
+/* -------------------- Hero Section -------------------- */
+.hero{
+  min-height:72vh;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:44px;
+}
+.hero .intro {
+  padding: 34px;
+  background: linear-gradient(180deg, rgba(8, 3, 10, 0.85), rgba(8, 3, 10, 0.5));
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+}
+
+.intro a {
+  color: #c7a07a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.intro a:hover {
+  color: #540d0d; 
+  text-decoration: none;
+}
+
+
+
+/* -------------------- Text Styles -------------------- */
+.kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(123,31,46,0.12);color:var(--accent);font-weight:700;font-size:12px}
+h1{font-family:'Playfair Display',serif;font-size:48px;margin:12px 0 8px;line-height:1}
+h1 .accent{color:var(--accent);text-shadow:0 6px 36px rgba(123,31,46,0.08)}
+.lead{font-size:17px;color:var(--muted);margin:6px 0 20px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.pill{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);font-size:13px;color:var(--muted)}
+.cta{display:flex;gap:14px;margin-top:22px}
+.btn{padding:12px 22px;font-weight:700;border:none;border-radius:10px;background:var(--accent);color:white;cursor:pointer;font-size:15px}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--muted)}
+.btn:hover{background:#9b2e43}
+.btn.ghost:hover{color:#fff;border-color:rgba(255,255,255,0.35)}
+
+/* Portrait Frame*/
+.portrait .frame{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.04)}
+.portrait svg.silhouette{width:100%;height:auto;display:block}
+.moon{position:absolute;right:10px;top:10px;width:100px;height:100px;animation:float 7s ease-in-out infinite}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+
+.portrait-img {
+    position: relative; z-index: 2; max-width: 100%;height: auto;
+    border-radius: 12px; box-shadow: 0 0 18px rgba(0,0,0,0.6);
+}
+.silhouette {
+  position: absolute;
+  inset: 0;
+  z-index: 1; 
+  opacity: 0.4; 
+  filter: blur(2px);
+}
+
+/* -------------------- About Section -------------------- */
+details {
+  margin-top: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #444; /*separator*/
+  padding: 8px 0;
+}
+
+details summary {
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  list-style: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details summary::-webkit-details-marker {
+  display: none; /* to remove default arrow */
+}
+
+/* Arrow on the left */
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  font-size: 0.85em;
+}
+
+/* Flip arrow when open */
+details[open] .arrow {
+  transform: rotate(90deg);
+}
+
+/* Dropdown content */
+.info-list {
+  margin-top: 8px;
+  padding-left: 24px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* -------------------- Gallery Section -------------------- */
+
+/* Card container for gallery */
+.card {
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(8, 3, 10, 0.85), rgba(8, 3, 10, 0.5));
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Gallery grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Gallery thumbnails */
+.thumb {
+  display: block; /* makes <a> behave as block */
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-weight: 700;
+  cursor: pointer; /* show pointer to indicate click */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* remove underline */
+}
+
+.thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Label inside thumbnail */
+.thumb .label {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3); /* light overlay */
+  backdrop-filter: blur(3px);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #fff;
+  pointer-events: none; 
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+
+/* Navigation links for reference */
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 10px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Underline on hover */
+nav a:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+/* Active page highlight */
+nav a.active {
+  color: var(--accent);
+}
+
+/*--------------Gallery title link effect ----------------*/
+.gallery-link {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.gallery-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.gallery-link:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.gallery-link:hover::after {
+  width: 100%;
+}
+
+/*----------------Lore section--------------------*/
+.lore-link {
+  color: #fff;
+  text-decoration: none;   
+  font-weight: 600;
+  position: relative;      /* needed for the underline effect */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.lore-link:hover {
+  color: var(--accent);    
+  transform: translateY(-2px); /* subtle lift effects */
+}
+
+/* Animated underline */
+.lore-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* space below text */
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.lore-link:hover::after {
+  width: 100%; /* expand underline smoothly */
+}
+
+/* (when clicked/holding down) */
+.lore-link:active {
+  transform: translateY(1px) scale(0.98); /* tiny press effect */
+  opacity: 0.8;
+}
+/* Lore events container */
+.lore {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  padding-left: 16px;
+}
+
+/* Event link wrapper */
+.lore a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  display: block; /* make the whole thing clickable */
+  padding: 4px 0;
+}
+
+/* Underline effect */
+.lore a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+/* Hover effect */
+.lore a:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.lore a:hover::after {
+  width: 100%;
+}
+
+/* Event layout inside each link */
+.evt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: -22px;
+  margin-top: 6px;
+}
+
+.when {
+  font-weight: 600;
+}
+/*-------------lore section end--------------------*/
+
+/* -------------------- More Section -------------------- */
+.more {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #ddd;
+  margin-top: 10px;
+  border-left: 3px solid var(--accent);
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(8, 3, 10, 0.75), rgba(8, 3, 10, 0.45));
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+.meta-grid h4 {
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.meta-grid p {
+  margin: 4px 0;
+  font-size: 0.9em;
+}
+
+
+/* -------------Footer ------------------*/
+footer{background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4));padding:28px 0;margin-top:60px;text-align:center;color:var(--muted);font-size:14px}
+
+audio {
+  display: none;
+}
+
+
+/* Responsive*/
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .portrait{order:-1;margin-bottom:24px}
+}

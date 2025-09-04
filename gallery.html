@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sylus Gallery</title>
+  <link rel="icon" type="image/png" href="content/rook.png"> <!-- favicon -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> <!-- Call your palette and styles -->
+
+  <style>
+    /* -------------------- Hero Video Header -------------------- */
+    header {
+      position: relative;
+      width: 100%;
+      height: 70vh; /* half-screen height */
+      overflow: hidden;
+    }
+    header video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      filter: brightness(0.35);
+      z-index: -1;
+    }
+
+    /* -------------------- Transparent Navigation -------------------- */
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 12px 24px;
+      background: rgba(15, 11, 18, 0.5); 
+      backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    nav a .link-icon {
+      font-size: 0.85em;
+      transition: transform 0.2s ease;
+    }
+    nav a:hover .link-icon {
+      transform: translateX(2px);
+    }
+
+    /* -------------------- Hero Overlay Text -------------------- */
+    .hero-text {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+      z-index: 5;
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin: 0;
+      color: #ff012b; /* softer red from palette */
+      text-shadow: 
+        0 0 2px #7b1f2e,
+        0 0 5px #7b1f2e,
+        0 0 10px rgba(123, 31, 46, 0.6),
+        0 0 15px rgba(123, 31, 46, 0.5);
+    }
+    .hero-text p {
+      font-size: 1.2em;
+      color: #fff;
+      text-shadow:
+      0 0 2px #f00,
+      0 0 4px #7b1f2e;
+    }
+
+    /* -------------------- Gallery Sections -------------------- */
+    section.gallery-section {
+      padding: 20px 24px;
+      background: var(--bg);
+    }
+    section.gallery-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #eee;
+      text-align: center;
+    }
+
+    .thumb-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 20px 24px 12px;
+      scroll-behavior: smooth;
+    }
+
+    .thumb {
+      flex: 0 0 200px;
+      overflow: hidden;
+      height: 250px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      font-weight: 700;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .thumb:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--accent);
+    }
+    .thumb:hover .label {
+      background: rgba(0,0,0,0.1);
+    }
+    .thumb .label {
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(3px);
+      font-size: 0.9em;
+      color: #fff;
+      position: relative;
+      bottom: 10px;
+      left: 10px;
+      z-index: 2;
+    }
+
+    .section-card {
+      background: rgba(15, 11, 18, 0.7); 
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      padding: 15px 30px 30px;
+      margin-bottom: 40px;
+      border-radius: 12px;
+    }
+
+    /* -------------------- Lightbox -------------------- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .lightbox:target {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      animation: zoomIn 0.3s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Hero Header with Video -->
+  <header>
+    <video autoplay muted loop>
+      <source src="content/sylusloop.mp4" type="video/mp4">
+    </video>
+
+    <!-- Transparent nav overlay -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="gallery.html" class="active">
+        Gallery <span class="link-icon"></span>
+      </a>
+      <a href="lore.html">
+        Lore <span class="link-icon"></span>
+      </a>
+      <a href="index.html#more">More</a>
+    </nav>
+
+    <div class="hero-text">
+      <h1>Sylus Memories</h1>
+      <p>Collected moments of Sylus — 3★ to 5★ memories</p>
+    </div>
+  </header>
+
+  <!-- 🔹 5-Star Memories -->
+  <section class="gallery-section">
+    <div class="section-card">
+      <h2>5★ Memories</h2>
+      <div class="thumb-container">
+        <a href="#img1" class="thumb" style="background-image:url('content/sylus5-1.webp');">
+          <div class="label">No Defense Zone</div>
+        </a>
+        <a href="#img2" class="thumb" style="background-image:url('content/sylus5-2.webp');">
+          <div class="label">Abyssal Blossom</div>
+        </a>
+        <a href="#img3" class="thumb" style="background-image:url('content/sylus5-3.webp');">
+          <div class="label">Innocent Birdcage</div>
+        </a>
+        <a href="#img4" class="thumb" style="background-image:url('content/sylus5-4.webp');">
+          <div class="label">Abyssal Mark</Mark></div>
+        </a>
+        <a href="#img5" class="thumb" style="background-image:url('content/sylus5-5.webp');">
+          <div class="label">Grassland Romance</div>
+        </a>
+        <a href="#img6" class="thumb" style="background-image:url('content/sylus5-6.webp');">
+          <div class="label">Goodcat Code</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 4-Star Memories -->
+  <section class="gallery-section">
+    <div class="section-card">
+        <h2>4★ Memories</h2>
+        <div class="thumb-container">
+            <a href="#img7" class="thumb" style="background-image:url('content/sylus4-1.webp');">
+            <div class="label">Approaching Dusk</div>
+            </a>
+            <a href="#img8" class="thumb" style="background-image:url('content/sylus4-2.webp');">
+            <div class="label">Freefall Gambit</div>
+            </a>
+             <a href="#img9" class="thumb" style="background-image:url('content/sylus4-3.webp');">
+            <div class="label">Razor's Grip</div>
+            </a>
+             <a href="#img10" class="thumb" style="background-image:url('content/sylus4-4.webp');">
+            <div class="label">Searing Touch</div>
+            </a>
+             <a href="#img11" class="thumb" style="background-image:url('content/sylus4-5.webp');">
+            <div class="label">Bloodnight Drift</div>
+            </a>
+        </div>
+    </div>
+  </section>
+
+  <!-- 🔹 3-Star Memories -->
+  <section class="gallery-section">
+    <div class="section-card">
+    <h2>3★ Memories</h2>
+    <div class="thumb-container">
+      <a href="#img12" class="thumb" style="background-image:url('content/sylus3-1.webp');">
+        <div class="label">Gifted Arrival</div>
+      </a>
+      <a href="#img13" class="thumb" style="background-image:url('content/sylus3-2.webp');">
+        <div class="label">Taking Control</div>
+      </a>
+      <a href="#img14" class="thumb" style="background-image:url('content/sylus3-3.webp');">
+        <div class="label">Just Encounter</div>
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Sylus Snippets -->
+  <section class="gallery-section">
+    <div class="section-card">
+    <h2>Sylus Snippets</h2>
+    <div class="thumb-container">
+      <a href="#img15" class="thumb" style="background-image:url('content/sylus.1.jpg');">
+      </a>
+      <a href="#img16" class="thumb" style="background-image:url('content/sylus.2.jpg');">  
+      </a>
+      <a href="#img17" class="thumb" style="background-image:url('content/sylus.3.jpg');">  
+      </a>
+      <a href="#img18" class="thumb" style="background-image:url('content/sylus.4.jpg');">
+      </a>
+      <a href="#img19" class="thumb" style="background-image:url('content/sylus.5.jpg');">
+      </a>
+      <a href="#img20" class="thumb" style="background-image:url('content/sylus.6.jpg');">
+      </a>
+      <a href="#img21" class="thumb" style="background-image:url('content/sylus.7.jpg');">
+      </a>
+      <a href="#img22" class="thumb" style="background-image:url('content/sylus.8.jpg');">
+      </a>
+      <a href="#img23" class="thumb" style="background-image:url('content/sylus.9.jpg');">
+      </a>
+      <a href="#img24" class="thumb" style="background-image:url('content/sylus.10.jpg');">
+      </a>
+    </div>
+    </div>
+  </section>
+
+
+  <!-- 🔹 Lightbox Images -->
+  <div id="img1" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-1.webp" alt=""></a></div>
+  <div id="img2" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-2.webp" alt=""></a></div>
+  <div id="img3" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-3.webp" alt=""></a></div>
+  <div id="img4" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-4.webp" alt=""></a></div>
+  <div id="img5" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-5.webp" alt=""></a></div>
+  <div id="img6" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus5-6.webp" alt=""></a></div>
+  <div id="img7" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus4-1.webp" alt=""></a></div>
+  <div id="img8" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus4-2.webp" alt=""></a></div>
+  <div id="img9" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus4-3.webp" alt=""></a></div>
+  <div id="img10" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus4-4.webp" alt=""></a></div>
+  <div id="img11" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus4-5.webp" alt=""></a></div>
+  <div id="img12" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus3-1.webp" alt=""></a></div>
+  <div id="img13" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus3-2.webp" alt=""></a></div>
+  <div id="img14" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus3-3.webp" alt=""></a></div>
+  <div id="img15" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.1.jpg" alt=""></a></div>
+  <div id="img16" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.2.jpg" alt=""></a></div>
+  <div id="img17" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.3.jpg" alt=""></a></div>
+  <div id="img18" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.4.jpg" alt=""></a></div>
+  <div id="img19" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.5.jpg" alt=""></a></div>
+  <div id="img20" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.6.jpg" alt=""></a></div>
+  <div id="img21" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.7.jpg" alt=""></a></div>
+  <div id="img22" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.8.jpg" alt=""></a></div>
+  <div id="img23" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.9.jpg" alt=""></a></div>
+  <div id="img24" class="lightbox"><a href="#!" class="lightbox-content"><img src="content/sylus.10.jpg" alt=""></a></div>
+
+</body>
+</html>
